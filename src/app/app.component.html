@@ -1,1 +1,25 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+    <p>The side Nav</p>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button (click)="toggleSidenav()" mat-icon-button >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span><a routerLink="/">FitTracker</a></span>
+      <div fxFlex fxLayout='row' fxLayoutAlign="flex-end" fxLayoutGap="12px">
+        <ul fxLayout fxLayoutGap="12px" class="navigation-items">
+          <li><a routerLink="/training">Training</a></li>
+          <li> <a routerLink="/signup">SignUp</a></li>
+          <li><a routerLink="/login">SignIn</a></li>
+        </ul>
+      </div>
+
+    </mat-toolbar>
+    <main>
+    <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
