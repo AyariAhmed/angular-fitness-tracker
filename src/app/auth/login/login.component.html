@@ -5,6 +5,7 @@
     fxLayoutGap="13px"
     [formGroup]="loginForm"
     (ngSubmit)="onSubmit()">
+
     <mat-form-field>
       <input
         type="email"
@@ -14,16 +15,24 @@
       <mat-hint>Please enter a valid email.</mat-hint>
       <mat-error>Invalid or missing email.</mat-error>
     </mat-form-field>
+
     <mat-form-field>
       <input
-        type="password"
+        [type]="hide ? 'password': 'text'"
         matInput
         placeholder="Your password"
         formControlName="password">
       <mat-hint>Please enter your password.</mat-hint>
       <mat-error>Missing password.</mat-error>
+
+      <button mat-icon-button matSuffix (click)="hide = !hide"
+              [disabled]="loginForm.get('password').value?.length == 0">
+        <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      </button>
     </mat-form-field>
+
     <button type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Submit</button>
+
   </form>
 </section>
 
