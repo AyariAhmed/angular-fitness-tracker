@@ -1,5 +1,9 @@
-mat-form-field{
-  width: 35%;
-  margin: 2px;
-  padding: 5px;
+form {
+  margin-top: 15px;
+}
+mat-form-field,mat-checkbox{
+  width: 30%;
+}
+button{
+  margin: 5px;
 }

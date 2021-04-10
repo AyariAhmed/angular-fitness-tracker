@@ -1,5 +1,5 @@
 <section>
-  <form (ngSubmit)="submitForm(f)" fxLayout="column" fxLayoutAlign="center center" #f="ngForm" >
+  <form (ngSubmit)="submitForm(f)" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" >
 
     <mat-form-field >
       <input
@@ -18,7 +18,7 @@
 
     <mat-form-field hintLabel="Should be at least 6 characters long." >
       <input
-        type="password"
+        [type]="hide ? 'password': 'text'"
         matInput
         placeholder="Your password"
         ngModel
@@ -26,8 +26,27 @@
         minlength="6"
         #pwInput="ngModel"
       />
+      <button mat-icon-button matSuffix (click)="hide = !hide" [disabled]="pwInput.value?.length == 0">
+        <mat-icon >{{hide ? 'visibility':'visibility_off'}}</mat-icon>
+      </button>
       <mat-hint align="end">({{pwInput.value?.length}} / 6)</mat-hint>
       <mat-error *ngIf="pwInput.value?.length<6">Password length must be at least 6 characters long.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        type="password"
+        matInput
+        placeholder="Confirm password"
+        ngModel
+        name="password-confirm"
+        minlength="6"
+        pattern="{{pwInput.value}}"
+        required
+        #pwConfirm="ngModel"
+      />
+      <mat-error *ngIf="pwConfirm.hasError('pattern')">Password & Confirm Password does not match.</mat-error>
+      <mat-error *ngIf="pwConfirm.hasError('required')">Password Confirmation field can't be empty.</mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -46,6 +65,14 @@
       <mat-error *ngIf="dateInput.hasError('required')">Birthdate field can't be empty.</mat-error>
     </mat-form-field>
 
-    <button type="submit" mat-raised-button color="primary">Submit</button>
+    <mat-checkbox
+      labelPosition="before"
+      ngModel
+      name="agree"
+      required
+    >Agree to Terms and Conditions.</mat-checkbox>
+
+
+    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
   </form>
 </section>
