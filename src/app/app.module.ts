@@ -11,6 +11,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { NewTrainingComponent } from './training/new-training/new-training.component';
 import { CurrentTrainingComponent } from './training/current-training/current-training.component';
 import { PastTrainingsComponent } from './training/past-trainings/past-trainings.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { PastTrainingsComponent } from './training/past-trainings/past-trainings
     LoginComponent,
     NewTrainingComponent,
     CurrentTrainingComponent,
-    PastTrainingsComponent
+    PastTrainingsComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
