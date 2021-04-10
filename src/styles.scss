@@ -2,11 +2,12 @@
 @import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
 
 $bgColor : #303030;
-
+$fontColor : #fff;
 
 html, body { height: 100%; }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: $bgColor;
+  color: $fontColor;
 }
