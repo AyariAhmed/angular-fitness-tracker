@@ -1,9 +1,9 @@
 <section class="new-training" fxLayout fxLayoutAlign="center">
-  <mat-card fxFlex="400px">
-    <mat-card-title>
+  <mat-card fxFlex.xs="95%" fxFlex="450px">
+    <mat-card-title fxLayoutAlign="center">
       Time To Start Workout!
     </mat-card-title>
-    <mat-card-content>
+    <mat-card-content fxLayoutAlign="center">
       <mat-form-field appearance="fill">
         <mat-label>Favorite food</mat-label>
         <mat-select>
@@ -22,8 +22,8 @@
         </mat-select>
       </mat-form-field>
     </mat-card-content>
-    <mat-card-actions>
-      <button type="submit" mat-button>Start</button>
+    <mat-card-actions fxLayoutAlign="center">
+      <button type="submit" mat-button (click)="onStartTraining()">Start</button>
     </mat-card-actions>
   </mat-card>
 
