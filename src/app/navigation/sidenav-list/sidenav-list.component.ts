@@ -1,4 +1,6 @@
 import {Component, OnInit, Output,EventEmitter} from '@angular/core';
+import {AuthService} from '../../auth/auth.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-sidenav-list',
@@ -8,13 +10,20 @@ import {Component, OnInit, Output,EventEmitter} from '@angular/core';
 export class SidenavListComponent implements OnInit {
 
   @Output() sidenavToggle = new EventEmitter();
+  authState : Subscription;
+  isAuth : boolean;
 
-  constructor() { }
+
+  constructor(private authService : AuthService) { }
 
   ngOnInit(): void {
   }
 
   onToggleSidenav() {
       this.sidenavToggle.emit();
+  }
+
+  onLogout(){
+    this.authService.logout();
   }
 }
