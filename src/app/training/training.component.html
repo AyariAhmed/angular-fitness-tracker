@@ -8,7 +8,7 @@
 </mat-tab-group>
 
 <ng-template #currentTraining>
-  <app-current-training>
+  <app-current-training (trainingExit)="ongoingTraining = false">
   </app-current-training>
 </ng-template>
 

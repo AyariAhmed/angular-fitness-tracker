@@ -25,7 +25,7 @@
       <mat-hint>Please enter your password.</mat-hint>
       <mat-error>Missing password.</mat-error>
 
-      <button mat-icon-button matSuffix (click)="hide = !hide"
+      <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
               [disabled]="loginForm.get('password').value?.length == 0">
         <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
       </button>
