@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angular-rxjs-mui": {
+      "hosting": {
+        "angular-rxjs-mui": [
+          "angular-rxjs-mui"
+        ]
+      }
+    }
+  }
+}
