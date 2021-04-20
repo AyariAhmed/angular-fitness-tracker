@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./past-trainings.component.scss']
 })
 export class PastTrainingsComponent implements OnInit {
+  dataSource: any;
 
   constructor() { }
 
