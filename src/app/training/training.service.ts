@@ -13,7 +13,7 @@ export class TrainingService {
   ];
 
   private runningExercise: Exercise;
-  private exercises = [];
+  private exercises : Exercise[] = [];
 
   getAvailableExercises(): Exercise[] {
     return this.availableExercises.slice();
@@ -44,6 +44,10 @@ export class TrainingService {
     });
     this.runningExercise = null;
     this.exerciseChanged.next(null);
+  }
+
+  getPastExercises() : Exercise[]{
+    return this.exercises.slice();
   }
 
 
