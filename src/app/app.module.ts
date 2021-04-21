@@ -22,6 +22,7 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {UiService} from './shared/ui.service';
 import {AuthModule} from './auth/auth.module';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -39,12 +40,10 @@ import {AuthModule} from './auth/auth.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    FlexLayoutModule,
-    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AuthModule
+    AuthModule,
+    SharedModule
   ],
   providers: [AuthService,TrainingService,UiService],
   bootstrap: [AppComponent]
