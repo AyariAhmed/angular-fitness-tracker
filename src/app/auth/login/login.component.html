@@ -31,8 +31,12 @@
       </button>
     </mat-form-field>
 
-    <button type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Submit</button>
-    <mat-spinner></mat-spinner>
+    <button *ngIf="!isLoading;else spinner" type="submit" mat-raised-button color="primary"
+            [disabled]="loginForm.invalid">Submit</button>
+    <ng-template #spinner>
+      <mat-spinner></mat-spinner>
+    </ng-template>
+
   </form>
 </section>
 

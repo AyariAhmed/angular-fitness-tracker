@@ -4,6 +4,7 @@ import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Subscription} from 'rxjs';
+import {UiService} from '../shared/ui.service';
 
 @Injectable()
 export class TrainingService {
@@ -15,10 +16,12 @@ export class TrainingService {
   private runningExercise: Exercise;
   finishedExercisesChanged: Subject<Exercise[]> = new Subject<Exercise[]>();
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore,
+              private uiService : UiService) {
   }
 
   fetchAvailableExercises() {
+    this.uiService.loadingStateChanged.next(true);
     this.fbSubs.push(this.db.collection('availableExercises').snapshotChanges()
       .pipe(map(docArray => {
         return docArray.map(doc => {
@@ -26,10 +29,12 @@ export class TrainingService {
           return {id: doc.payload.doc.id, ...data};
         });
       })).subscribe((exercises: Exercise[]) => {
+        this.uiService.loadingStateChanged.next(false);
         this.availableExercises = exercises;
         this.exercisesChanged.next(this.availableExercises.slice());
       }, error => {
-        console.log(error);
+        this.uiService.loadingStateChanged.next(false);
+        this.uiService.openSnackBar(error.message);
       }));
 
   }
@@ -62,10 +67,13 @@ export class TrainingService {
   }
 
   FetchPastExercises(): void {
+    this.uiService.loadingStateChanged.next(true);
     this.fbSubs.push(this.db.collection('finishedExercises').valueChanges().subscribe((exercises: Exercise[]) => {
+      this.uiService.loadingStateChanged.next(false);
       this.finishedExercisesChanged.next(exercises);
     }, error => {
-      console.log(error);
+      this.uiService.loadingStateChanged.next(false);
+      this.uiService.openSnackBar(error.message);
     }));
   }
 
@@ -74,7 +82,9 @@ export class TrainingService {
   }
 
   private addDataToDatabase(exercise: Exercise) {
-    this.db.collection('finishedExercises').add(exercise);
+    this.db.collection('finishedExercises').add(exercise).catch(error => {
+      this.uiService.openSnackBar(error.message);
+    });
   }
 
 

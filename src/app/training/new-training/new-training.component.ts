@@ -3,6 +3,8 @@ import {TrainingService} from '../training.service';
 import {Exercise} from '../exercise.model';
 import {NgForm} from '@angular/forms';
 import {Subscription} from 'rxjs';
+import {AuthService} from '../../auth/auth.service';
+import {UiService} from '../../shared/ui.service';
 
 @Component({
   selector: 'app-new-training',
@@ -13,11 +15,15 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
 
   exercises: Exercise[] = [];
   exercisesSubscription: Subscription;
+  isLoading : boolean = false;
+  private loadingStateSubscription : Subscription;
 
-  constructor(private trainingService: TrainingService) {
+  constructor(private trainingService: TrainingService,private uiService :UiService) {
   }
 
   ngOnInit(): void {
+    this.loadingStateSubscription = this.uiService.loadingStateChanged.subscribe(state => this.isLoading=state);
+
     this.exercisesSubscription = this.trainingService.exercisesChanged.subscribe(ex => this.exercises = ex);
     this.trainingService.fetchAvailableExercises();
   }
@@ -27,6 +33,7 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.loadingStateSubscription.unsubscribe();
     this.exercisesSubscription.unsubscribe();
   }
 

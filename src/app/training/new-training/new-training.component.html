@@ -4,6 +4,7 @@
       <mat-card-title fxLayoutAlign="center">
         Time To Start Workout!
       </mat-card-title>
+      <ng-container *ngIf="!isLoading;else spinner">
       <mat-card-content fxLayoutAlign="center">
         <mat-form-field appearance="fill">
           <mat-label>Choose exercise</mat-label>
@@ -18,6 +19,14 @@
       <mat-card-actions fxLayoutAlign="center">
         <button type="submit" mat-button [disabled]="f.invalid">Start</button>
       </mat-card-actions>
+      </ng-container>
+
+      <ng-template  #spinner>
+        <div fxLayoutAlign="center">
+          <mat-spinner ></mat-spinner>
+        </div>
+      </ng-template>
+
     </mat-card>
   </form>
 </section>
