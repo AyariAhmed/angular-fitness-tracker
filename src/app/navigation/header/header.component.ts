@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit ,OnDestroy{
   }
 
   ngOnDestroy() {
+    if(this.authState)
     this.authState.unsubscribe();
   }
 

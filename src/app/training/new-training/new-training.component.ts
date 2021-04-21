@@ -15,14 +15,14 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
 
   exercises: Exercise[] = [];
   exercisesSubscription: Subscription;
-  isLoading : boolean = false;
-  private loadingStateSubscription : Subscription;
+  isLoading: boolean = false;
+  private loadingStateSubscription: Subscription;
 
-  constructor(private trainingService: TrainingService,private uiService :UiService) {
+  constructor(private trainingService: TrainingService, private uiService: UiService) {
   }
 
   ngOnInit(): void {
-    this.loadingStateSubscription = this.uiService.loadingStateChanged.subscribe(state => this.isLoading=state);
+    this.loadingStateSubscription = this.uiService.loadingStateChanged.subscribe(state => this.isLoading = state);
 
     this.exercisesSubscription = this.trainingService.exercisesChanged.subscribe(ex => this.exercises = ex);
     this.trainingService.fetchAvailableExercises();
@@ -33,8 +33,12 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.loadingStateSubscription.unsubscribe();
-    this.exercisesSubscription.unsubscribe();
+    if (this.loadingStateSubscription) {
+      this.loadingStateSubscription.unsubscribe();
+    }
+    if (this.exercisesSubscription) {
+      this.exercisesSubscription.unsubscribe();
+    }
   }
 
 }

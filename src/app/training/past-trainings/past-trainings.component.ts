@@ -11,19 +11,20 @@ import {Subscription} from 'rxjs';
   templateUrl: './past-trainings.component.html',
   styleUrls: ['./past-trainings.component.scss']
 })
-export class PastTrainingsComponent implements OnInit,AfterViewInit , OnDestroy{
+export class PastTrainingsComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChild(MatSort) sort : MatSort;
-  @ViewChild(MatPaginator) paginator : MatPaginator;
-  finishedExercisesSubscription : Subscription;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  finishedExercisesSubscription: Subscription;
 
-  displayedColumns: string[] = ['date','name','duration','calories','state'];
-  dataSource : MatTableDataSource<Exercise> = new MatTableDataSource();
+  displayedColumns: string[] = ['date', 'name', 'duration', 'calories', 'state'];
+  dataSource: MatTableDataSource<Exercise> = new MatTableDataSource();
 
-  constructor(private trainingService:TrainingService) { }
+  constructor(private trainingService: TrainingService) {
+  }
 
   ngOnInit(): void {
-    this.finishedExercisesSubscription = this.trainingService.finishedExercisesChanged.subscribe((exercises : Exercise[])=>{
+    this.finishedExercisesSubscription = this.trainingService.finishedExercisesChanged.subscribe((exercises: Exercise[]) => {
       this.dataSource.data = exercises;
     });
     this.trainingService.FetchPastExercises();
@@ -37,7 +38,10 @@ export class PastTrainingsComponent implements OnInit,AfterViewInit , OnDestroy{
   doFilter(value: string) {
     this.dataSource.filter = value.trim().toLowerCase();
   }
+
   ngOnDestroy() {
-    this.finishedExercisesSubscription.unsubscribe();
+    if (this.finishedExercisesSubscription) {
+      this.finishedExercisesSubscription.unsubscribe();
+    }
   }
 }
