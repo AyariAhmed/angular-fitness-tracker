@@ -14,6 +14,7 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {UiService} from './shared/ui.service';
 import {AuthModule} from './auth/auth.module';
 import {SharedModule} from './shared/shared.module';
+import { StoreModule } from '@ngrx/store';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {SharedModule} from './shared/shared.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AuthModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forRoot({}, {})
   ],
   providers: [AuthService,TrainingService,UiService],
   bootstrap: [AppComponent]
