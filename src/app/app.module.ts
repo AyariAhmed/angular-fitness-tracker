@@ -15,6 +15,8 @@ import {UiService} from './shared/ui.service';
 import {AuthModule} from './auth/auth.module';
 import {SharedModule} from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
+import {appReducer} from './app.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 @NgModule({
@@ -32,7 +34,8 @@ import { StoreModule } from '@ngrx/store';
     AngularFirestoreModule,
     AuthModule,
     SharedModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot({ui : appReducer}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [AuthService,TrainingService,UiService],
   bootstrap: [AppComponent]
