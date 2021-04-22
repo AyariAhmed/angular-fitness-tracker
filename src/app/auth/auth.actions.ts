@@ -11,6 +11,4 @@ export class SetUnauthenticated implements Action{
   readonly type = SET_UNAUTHENTICATED;
 }
 
-
-
 export type AuthActions = SetAuthenticated | SetUnauthenticated;
