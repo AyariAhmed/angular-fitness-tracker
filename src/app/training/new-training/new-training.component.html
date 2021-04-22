@@ -4,12 +4,12 @@
       <mat-card-title fxLayoutAlign="center">
         Time To Start Workout!
       </mat-card-title>
-      <ng-container *ngIf="!isLoading;else spinner">
+      <ng-container *ngIf="!(isLoading$ | async);else spinner">
       <mat-card-content fxLayoutAlign="center">
         <mat-form-field appearance="fill">
           <mat-label>Choose exercise</mat-label>
           <mat-select ngModel name="exercise" required>
-            <mat-option *ngFor="let exercise of exercises " [value]="exercise.id">
+            <mat-option *ngFor="let exercise of (exercises$ | async) " [value]="exercise.id">
               {{exercise.name}}
             </mat-option>
 

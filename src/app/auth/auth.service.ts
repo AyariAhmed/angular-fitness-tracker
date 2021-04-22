@@ -12,14 +12,12 @@ import * as Auth from './auth.actions';
 @Injectable()
 export class AuthService {
 
-
   constructor(private router: Router,
               private afAuth: AngularFireAuth,
               private trainingService: TrainingService,
               private uiService : UiService,
               private store : Store<fromRoot.State>
-              ) {
-  }
+              ) {}
 
   initAuthListener(){
     this.afAuth.authState.subscribe(user =>{
@@ -44,7 +42,6 @@ export class AuthService {
         this.store.dispatch(new UI.StopLoading());
         this.uiService.openSnackBar(error.message);
       });
-
   }
 
   login(authData: AuthData) {
@@ -62,11 +59,5 @@ export class AuthService {
 
   logout() {
     this.afAuth.signOut();
-
   }
-
-
-
-
-
 }
